@@ -4,7 +4,7 @@ import javax.sound.midi.Sequence;
 import java.util.*;
 
 public class Queue<T> {
-    List<T> data;
+    protected List<T> data;
 
     public Queue(){
         this.data = new ArrayList<T>();
