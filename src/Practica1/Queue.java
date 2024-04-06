@@ -1,6 +1,5 @@
 package Practica1;
 
-import javax.sound.midi.Sequence;
 import java.util.*;
 
 public class Queue<T> {
@@ -32,11 +31,11 @@ public class Queue<T> {
 
     @Override
     public String toString(){
-        String aux = "[ ";
+        String aux = "[";
         for (T d: data){
-            aux = aux + d + " , ";
+            aux = aux + d + ", ";
         }
-        aux += " ]";
+        aux += aux.substring(0, aux.length()-2) + "]";
         return aux;
     }
 

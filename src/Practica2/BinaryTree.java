@@ -1,6 +1,7 @@
 package Practica2;
 
 
+import Practica1.Queue;
 
 public class BinaryTree <T> {
 	private T data;
@@ -28,7 +29,7 @@ public class BinaryTree <T> {
 	 * @return
 	 */
 	public BinaryTree<T> getLeftChild() {
-		return leftChild;
+		return this.leftChild;
 	}
 	/**
 	 * Preguntar antes de invocar si hasRightChild()
@@ -75,39 +76,69 @@ public class BinaryTree <T> {
 		return this.getData().toString();
 	}
 
-	public  int contarHojas() {
-		int hojas = 0;
+	public int contarHojas() {
 		if (isEmpty()){
 			return 0;
 		}
-		if (hasRightChild()){
-			hojas += this.getRightChild().contarHojas();
+		else if (isLeaf()){
+			return 1;
 		}
-		if (hasLeftChild()){
-			hojas += this.getLeftChild().contarHojas();
-        }
-		return hojas;
+		else {
+			int hojas = 0;
+			if (hasLeftChild()){
+                hojas += this.getLeftChild().contarHojas();
+            }
+			if (hasRightChild()){
+				hojas += this.getRightChild().contarHojas();
+			}
+			return hojas;
+		}
 	}
 
     public BinaryTree<T> espejo(){
-		BinaryTree<T> abEspejo = new BinaryTree<>(this.data);
-		if (isEmpty()){
+		if (this.isEmpty()){
 			return null;
 		}
-		if (this.hasLeftChild()){
-			abEspejo.addRightChild(this.getLeftChild());
-			return abEspejo.getRightChild();
+		else {
+			BinaryTree<T> abEspejo = new BinaryTree<>(this.getData());
+			if (hasLeftChild()){
+				abEspejo.addRightChild(this.getLeftChild().espejo());
+			}
+			if (hasRightChild()){
+				abEspejo.addLeftChild(this.getRightChild().espejo());
+			}
+			return abEspejo;
 		}
-		if (this.hasRightChild()){
-			abEspejo.addLeftChild(this.getRightChild());
-			return abEspejo.getLeftChild();
-		}
-		return abEspejo;
     }
 
 	// 0<=n<=m
 	public void entreNiveles(int n, int m){
-		int i = 0;
+		BinaryTree<T> aux;
+		Queue<BinaryTree<T>> cola = new Queue<>();
+		cola.enQueue(this);
+		cola.enQueue(null);
+		int nivel = 0;
+		while (!cola.isEmpty() && nivel <= m){
+			aux = cola.deQueue();
+			if (aux != null){
+				if (nivel >= n && nivel <= m){
+					System.out.println(aux.getData());
+				}
+				if (hasLeftChild()){
+					cola.enQueue(aux.getLeftChild());
+				}
+				if (hasRightChild()) {
+					cola.enQueue(aux.getRightChild());
+				}
+			}
+			else {
+				nivel++;
+				if (!cola.isEmpty()) {
+					cola.enQueue(null);
+				}
+			}
+		}
+
    	}
 		
 }
