@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Ej1;
 
 public class Ej1 {
     public static void imprimirNumerosA (int n1, int n2){

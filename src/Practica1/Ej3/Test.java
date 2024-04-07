@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Ej3;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Ej7;
 
 import java.util.LinkedList;
 

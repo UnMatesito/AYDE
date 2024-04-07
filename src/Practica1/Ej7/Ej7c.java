@@ -1,4 +1,6 @@
-package Practica1;
+package Practica1.Ej7;
+
+import Practica1.Ej3.Estudiante;
 
 import java.util.*;
 

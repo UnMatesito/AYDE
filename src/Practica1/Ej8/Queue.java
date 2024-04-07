@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Ej8;
 
 import java.util.*;
 

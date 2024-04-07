@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Ej4;
 
 public class Ej4 {
     public static void swap1 (int x, int y) { //Pasaje de parametros por valor

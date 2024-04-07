@@ -1,7 +1,7 @@
 package Practica2;
 
 
-import Practica1.Queue;
+import Practica1.Ej8.Queue;
 
 public class BinaryTree <T> {
 	private T data;

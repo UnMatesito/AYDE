@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Ej5;
 
 public class Ej5 {
     private int min = 9999;
