@@ -28,7 +28,7 @@ public class Transformacion {
     }
 
     public BinaryTree<Integer> suma(){
-        if (a.isEmpty()){
+        if (!a.isEmpty()){
             sumar(a);
         }
         return this.a;
