@@ -132,9 +132,9 @@ public class BinaryTree <T> {
 				}
 			}
 			else {
-				nivel++;
 				if (!cola.isEmpty()) {
 					cola.enQueue(null);
+					nivel++;
 				}
 			}
 		}
