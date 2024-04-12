@@ -10,7 +10,7 @@ public class Transformacion {
         this.a = a;
     }
 
-    public int sumar(BinaryTree<Integer> ab){
+    private int sumar(BinaryTree<Integer> ab){
         int suma = 0;
         if (ab.isLeaf()){
             suma = ab.getData();
