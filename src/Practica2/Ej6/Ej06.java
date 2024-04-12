@@ -3,7 +3,6 @@ package Practica2.Ej6;
 import Practica2.BinaryTree;
 
 public class Ej06 {
-
     public static void imprimirArbol(BinaryTree<Integer> arbol){
         System.out.println(arbol.getData());
         if (arbol.hasLeftChild()){

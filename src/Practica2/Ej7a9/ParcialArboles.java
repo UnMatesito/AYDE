@@ -61,5 +61,24 @@ public class ParcialArboles {
         }
     }
 
+    private void creacionArbol(BinaryTree<SumYDif> a2, BinaryTree<Integer> a1, int suma, int aux){
+        a2.setData(new SumYDif(suma, a1.getData()-aux));
+        if (a1.hasLeftChild()){
+            a2.addLeftChild(new BinaryTree<SumYDif>());
+            creacionArbol(a2.getLeftChild(), a1.getLeftChild(), suma+a1.getLeftChild().getData(), a1.getData());
+        }
+        if (a1.hasRightChild()){
+            a2.addRightChild(new BinaryTree<SumYDif>());
+            creacionArbol(a2.getRightChild(), a1.getRightChild(), suma + a1.getRightChild().getData(), a1.getData());
+        }
+    }
+
+    public BinaryTree<SumYDif> SumAndDif(BinaryTree<Integer> arbol){
+        BinaryTree<SumYDif> newArbol = new BinaryTree<>();
+        if (!arbol.isEmpty()){
+            creacionArbol(newArbol, arbol, 0, 0);
+        }
+        return newArbol;
+    }
 
 }
