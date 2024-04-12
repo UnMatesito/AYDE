@@ -1,6 +1,5 @@
 package Practica2.Ej6;
 
-import Practica1.Ej8.Queue;
 import Practica2.BinaryTree;
 
 public class Transformacion {
