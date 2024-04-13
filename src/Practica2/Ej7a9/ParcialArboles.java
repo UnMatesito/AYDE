@@ -16,29 +16,53 @@ public class ParcialArboles {
         this.a = a;
     }
 
-    public boolean isLeftTree(int num){
-        BinaryTree<Integer> aux;
-        Queue<BinaryTree<Integer>> cola = new Queue<>();
-        cola.enQueue(a);
-        cola.enQueue(null);
-        while (!cola.isEmpty()){
-            aux = cola.deQueue();
-            if (aux != null) {
-                if (num == aux.getData()){
-                    return aux.hasLeftChild() && !aux.hasRightChild();
-                }
-                if (a.hasLeftChild()) {
-                    cola.enQueue(aux.getLeftChild());
-                }
-                if (a.hasRightChild()) {
-                    cola.enQueue(aux.getRightChild());
-                }
-            }
-            else {
-                cola.enQueue(null);
-            }
+    private int isLeftTreeHelper(BinaryTree<Integer> arbol){
+        if (arbol.isLeaf()){
+            return 0;
         }
-        return false;
+        else if (arbol.hasLeftChild() && !arbol.hasRightChild()) {
+            return 1 + isLeftTreeHelper(arbol.getLeftChild());
+        }
+        else if (arbol.hasRightChild() && !arbol.hasLeftChild()) {
+            return 1 + isLeftTreeHelper(arbol.getRightChild());
+        }
+        return isLeftTreeHelper(arbol.getLeftChild()) + isLeftTreeHelper(arbol.getRightChild());
+    }
+
+    private BinaryTree<Integer> buscarNum(BinaryTree<Integer> arbol, int num){
+        if (arbol.getData() == num){
+            return arbol;
+        }
+        BinaryTree<Integer> ab = null;
+        if (arbol.hasLeftChild()){
+            ab = buscarNum(arbol.getLeftChild(), num);
+        }
+        if (arbol.hasRightChild() && (ab == null)){
+            ab = buscarNum(arbol.getRightChild(), num);
+        }
+        return ab;
+    }
+
+    public boolean isLeftTree(int num){
+        BinaryTree<Integer> aux = buscarNum(a, num);
+        int hi;
+        int hd;
+        if (aux == null){
+            return false;
+        }
+        if (aux.hasLeftChild()){
+            hi = isLeftTreeHelper(aux.getLeftChild());
+        }
+        else {
+            hi = -1;
+        }
+        if (aux.hasRightChild()){
+            hd = isLeftTreeHelper(aux.getRightChild());
+        }
+        else {
+            hd = -1;
+        }
+        return hi > hd;
     }
 
     public boolean esPrefijo(BinaryTree<Integer> arbol1, BinaryTree<Integer> arbol2){
