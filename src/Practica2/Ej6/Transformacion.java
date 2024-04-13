@@ -1,6 +1,5 @@
 package Practica2.Ej6;
 
-import Practica1.Ej8.Queue;
 import Practica2.BinaryTree;
 
 public class Transformacion {
@@ -10,7 +9,7 @@ public class Transformacion {
         this.a = a;
     }
 
-    public int sumar(BinaryTree<Integer> ab){
+    private int sumar(BinaryTree<Integer> ab){
         int suma = 0;
         if (ab.isLeaf()){
             suma = ab.getData();
@@ -29,7 +28,9 @@ public class Transformacion {
     }
 
     public BinaryTree<Integer> suma(){
-        sumar(a);
+        if (!a.isEmpty()){
+            sumar(a);
+        }
         return this.a;
     }
 }
