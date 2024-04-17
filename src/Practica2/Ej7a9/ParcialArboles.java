@@ -3,6 +3,8 @@ package Practica2.Ej7a9;
 import Practica1.Ej8.Queue;
 import Practica2.BinaryTree;
 
+import java.util.ArrayList;
+
 public class ParcialArboles {
     private BinaryTree<Integer> a;
 
@@ -14,40 +16,53 @@ public class ParcialArboles {
         this.a = a;
     }
 
-    private int recorrerArbol(BinaryTree<Integer> arbol, int num){
-        int dato = 0;
+    private int isLeftTreeHelper(BinaryTree<Integer> arbol){
         if (arbol.isLeaf()){
-            return 1;
+            return 0;
         }
-        if (arbol.getData() == num) {
-            int hi = 0;
-            int hd = 0;
-            if (arbol.hasLeftChild()) {
-                hi += 0;
-            }
-            if (arbol.hasRightChild()) {
-
-            }
-            if (hi > hd){
-                return 1;
-            }
-            else{
-                return 0;
-            }
+        else if (arbol.hasLeftChild() && !arbol.hasRightChild()) {
+            return 1 + isLeftTreeHelper(arbol.getLeftChild());
         }
-        if (arbol.hasLeftChild()) {
-            recorrerArbol(arbol.getLeftChild(), num);
+        else if (arbol.hasRightChild() && !arbol.hasLeftChild()) {
+            return 1 + isLeftTreeHelper(arbol.getRightChild());
         }
-        if (arbol.hasRightChild()) {
-            recorrerArbol(arbol.getRightChild(), num);
-        }
-        return dato;
+        return isLeftTreeHelper(arbol.getLeftChild()) + isLeftTreeHelper(arbol.getRightChild());
     }
 
+    private BinaryTree<Integer> buscarNum(BinaryTree<Integer> arbol, int num){
+        if (arbol.getData() == num){
+            return arbol;
+        }
+        BinaryTree<Integer> ab = null;
+        if (arbol.hasLeftChild()){
+            ab = buscarNum(arbol.getLeftChild(), num);
+        }
+        if (arbol.hasRightChild() && (ab == null)){
+            ab = buscarNum(arbol.getRightChild(), num);
+        }
+        return ab;
+    }
 
     public boolean isLeftTree(int num){
-        int dato = recorrerArbol(a, num);
-        return dato == 1;
+        BinaryTree<Integer> aux = buscarNum(a, num);
+        int hi;
+        int hd;
+        if (aux == null){
+            return false;
+        }
+        if (aux.hasLeftChild()){
+            hi = isLeftTreeHelper(aux.getLeftChild());
+        }
+        else {
+            hi = -1;
+        }
+        if (aux.hasRightChild()){
+            hd = isLeftTreeHelper(aux.getRightChild());
+        }
+        else {
+            hd = -1;
+        }
+        return hi > hd;
     }
 
     public boolean esPrefijo(BinaryTree<Integer> arbol1, BinaryTree<Integer> arbol2){
@@ -73,12 +88,12 @@ public class ParcialArboles {
     private void creacionArbol(BinaryTree<SumYDif> a2, BinaryTree<Integer> a1, int suma, int aux){
         a2.setData(new SumYDif(suma, a1.getData()-aux));
         if (a1.hasLeftChild()){
-            a2.addLeftChild(new BinaryTree<>());
+            a2.addLeftChild(new BinaryTree<SumYDif>());
             creacionArbol(a2.getLeftChild(), a1.getLeftChild(), suma+a1.getLeftChild().getData(), a1.getData());
         }
         if (a1.hasRightChild()){
-            a2.addRightChild(new BinaryTree<>());
-            creacionArbol(a2.getRightChild(), a1.getRightChild(), suma+a1.getRightChild().getData(), a1.getData());
+            a2.addRightChild(new BinaryTree<SumYDif>());
+            creacionArbol(a2.getRightChild(), a1.getRightChild(), suma + a1.getRightChild().getData(), a1.getData());
         }
     }
 
