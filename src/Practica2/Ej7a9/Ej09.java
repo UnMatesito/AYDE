@@ -16,6 +16,12 @@ public class Ej09 {
 
     public static void imprimirArbol2(BinaryTree<SumYDif> arbol){
         System.out.println(arbol.getData().toString());
+        if (arbol.hasLeftChild()){
+            imprimirArbol2(arbol.getLeftChild());
+        }
+        if (arbol.hasRightChild()){
+            imprimirArbol2(arbol.getRightChild());
+        }
     }
 
     public static void main(String[] args) {
