@@ -1,9 +1,7 @@
 package Practica3.Ej2;
 
 import Practica3.GeneralTree;
-
 import java.util.*;
-
 import Practica1.Ej8.Queue;
 
 public class RecorridosAG {
@@ -21,25 +19,26 @@ public class RecorridosAG {
         return lista;
     }
 
-    public List<Integer> numerosImparesMayoresQueInOrden (GeneralTree<Integer> a, Integer n){
-        List<Integer> lista = new ArrayList<>();
-        Queue<GeneralTree<Integer>> cola = new Queue<>();
-        GeneralTree<Integer> aux;
-        cola.enQueue(a);
-        while(!cola.isEmpty()){
-            aux = cola.deQueue();
-            if (aux.getChildren().getFirst().getData() > n && aux.getChildren().getFirst().getData() % 2 != 0){
-                lista.add(aux.getChildren().getFirst().getData());
+    private static void numerosImparesMayoresQueInOrdenHelper(GeneralTree<Integer> a,int n, List<Integer> l) {
+        if(!a.isLeaf()) {
+            List<GeneralTree<Integer>> children = a.getChildren();
+            numerosImparesMayoresQueInOrdenHelper(children.get(0),n,l);
+            int data = a.getData();
+            if(data > n && data % 2 != 0) l.add(data);
+            for(int i = 1; i < children.size(); i++) {
+                numerosImparesMayoresQueInOrdenHelper(children.get(i),n,l);
             }
-            if (aux.getData() > n && aux.getData() % 2 != 0){
-                lista.add(aux.getData());
-            }
-            List<GeneralTree<Integer>> children = aux.getChildren();
-            for (GeneralTree<Integer> c: children){
-                List<Integer> sublist = numerosImparesMayoresQueInOrden(c, n);
-                lista.addAll(sublist);
+        } else {
+            int data = a.getData();
+            if(data > n && data % 2 != 0){
+                l.add(data);
             }
         }
+    }
+
+    public List<Integer> numerosImparesMayoresQueInOrden (GeneralTree<Integer> a, Integer n){
+        List<Integer> lista = new ArrayList<>();
+        numerosImparesMayoresQueInOrdenHelper(a, n, lista);
         return lista;
     }
 

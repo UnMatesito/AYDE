@@ -1,5 +1,6 @@
 package Practica3;
 
+import Practica1.Ej8.Queue;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,16 +60,76 @@ public class GeneralTree<T>{
 	}
 	
 	public int altura() {	 
-			
-		return 0;
+		int alt = 0;
+		GeneralTree<T> aux;
+		Queue<GeneralTree<T>> cola = new Queue<>();
+		cola.enQueue(this);
+		cola.enQueue(null);
+		while (!cola.isEmpty()){
+			aux = cola.deQueue();
+			if (aux != null){
+				List<GeneralTree<T>> children = aux.getChildren();
+				for (GeneralTree<T> c: children){
+					cola.enQueue(c);
+				}
+			}
+			else {
+				if (!cola.isEmpty()){
+					cola.enQueue(null);
+					alt++;
+				}
+			}
+		}
+		return alt;
 	}
 	
 	public int nivel(T dato){
-		return 0;
-	  }
+		int nivel = 0;
+		GeneralTree<T> aux;
+		Queue<GeneralTree<T>> cola = new Queue<>();
+		cola.enQueue(this);
+		cola.enQueue(null);
+		while (!cola.isEmpty()){
+			aux = cola.deQueue();
+			if (aux != null){
+				if (aux.getData() == dato){
+					return nivel;
+				}
+				List<GeneralTree<T>> children = aux.getChildren();
+				for (GeneralTree<T> c: children){
+					cola.enQueue(c);
+				}
+			}
+			else {
+				if (!cola.isEmpty()){
+					cola.enQueue(null);
+					nivel++;
+				}
+			}
+		}
+		return nivel;
+	}
+
+	private int anchoHelper(GeneralTree<T> a, int max){
+		if (a.isLeaf()){
+			return 1;
+		}
+		else {
+			int anch = 0;
+			List<GeneralTree<T>> children = a.getChildren();
+			for (GeneralTree<T> c : children){
+				anch += anchoHelper(c, max);
+			}
+			if (anch > max){
+				max = anch;
+			}
+		}
+		return max;
+	}
 
 	public int ancho(){
-		
-		return 0;
+		int max = 0;
+		anchoHelper(this, max);
+		return max;
 	}
 }
