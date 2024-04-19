@@ -1,4 +1,4 @@
-package Practica3.Ej2;
+package Practica3.Ej3;
 
 import Practica3.GeneralTree;
 

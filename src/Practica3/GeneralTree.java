@@ -107,29 +107,31 @@ public class GeneralTree<T>{
 				}
 			}
 		}
-		return nivel;
-	}
-
-	private int anchoHelper(GeneralTree<T> a, int max){
-		if (a.isLeaf()){
-			return 1;
-		}
-		else {
-			int anch = 0;
-			List<GeneralTree<T>> children = a.getChildren();
-			for (GeneralTree<T> c : children){
-				anch += anchoHelper(c, max);
-			}
-			if (anch > max){
-				max = anch;
-			}
-		}
-		return max;
+		return 0;
 	}
 
 	public int ancho(){
 		int max = 0;
-		anchoHelper(this, max);
+		GeneralTree<T> aux;
+		Queue<GeneralTree<T>> cola = new Queue<>();
+		cola.enQueue(this);
+		cola.enQueue(null);
+		while (!cola.isEmpty()){
+			int anch = 0;
+			aux = cola.deQueue();
+			if (aux != null){
+				anch++;
+				List<GeneralTree<T>> c = aux.getChildren();
+				for (GeneralTree<T> ch: c){
+					cola.enQueue(ch);
+				}
+			}
+			else {
+				if (!cola.isEmpty()){
+					cola.enQueue(null);
+				}
+			}
+		}
 		return max;
 	}
 }
