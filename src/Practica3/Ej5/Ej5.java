@@ -24,6 +24,6 @@ public class Ej5 {
         hijos4.add(nodo4);
         hijos4.add(nodo5);
         GeneralTree<Integer> raiz = new GeneralTree<>(20, hijos4);
-        System.out.println(raiz.esAncestro(4, 5));
+        System.out.println(raiz.esAncestro(20, 7));
     }
 }

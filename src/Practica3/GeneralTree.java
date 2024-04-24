@@ -3,6 +3,7 @@ package Practica3;
 import Practica1.Ej8.Queue;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -148,13 +149,15 @@ public class GeneralTree<T>{
 
 	private boolean buscarB(GeneralTree<T> arbol, T b){
 		boolean encontrado = false;
-		if (arbol.getData() == b){
+		if (arbol.getData().equals(b)){
 			return true;
 		}
 		else {
 			List<GeneralTree<T>> children = arbol.getChildren();
-			for (GeneralTree<T> c: children){
-				encontrado = buscarB(c, b);
+			Iterator<GeneralTree<T>> it = children.iterator();
+			while (it.hasNext() && encontrado != true){
+				GeneralTree<T> child = it.next();
+				encontrado = buscarB(child, b);
 			}
 		}
 		return encontrado;
@@ -162,23 +165,22 @@ public class GeneralTree<T>{
 
 	private boolean esAncestroHelper(GeneralTree<T> arbol, T a ,T b){
 		boolean ancestro = false;
-		if (arbol.getData() == a){
-			List<GeneralTree<T>> children = arbol.getChildren();
-			for (GeneralTree<T> c: children){
-				ancestro = buscarB(c, b);
-			}
+		if (arbol.getData().equals(a)){
+			ancestro = buscarB(arbol, b);
 		}
 		else {
 			List<GeneralTree<T>> children = arbol.getChildren();
-			for (GeneralTree<T> c: children){
-				esAncestroHelper(c, a, b);
+			Iterator<GeneralTree<T>> it = children.iterator();
+			while (it.hasNext() && ancestro != true){
+				GeneralTree<T> child = it.next();
+				ancestro = esAncestroHelper(child, a, b);
 			}
 		}
 		return ancestro;
 	}
 
 	public boolean esAncestro(T a, T b){
-		if (a == b){
+		if (a.equals(b)){
 			return true;
 		}
 		else {
