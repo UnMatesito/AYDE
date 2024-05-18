@@ -1,0 +1,48 @@
+Se perdieron datos sobre el estado de cuentas de banco
+
+Las transascciones se encuentran agrupadas en consultas
+
+Cada consulta cuenta con un valor y una rango de cuentas consecutivas a las que se aplican un cambio
+
+Ejemplo: Desde la consulta con la cuenta 333 hasta la cuenta 688 se le suman $120 (inclusive)
+
+Entonces, la recuperación de los datos consiste en aplicar todas las consultas sobre el
+estado de las cuentas recuperadas en el backup del día anterior.
+
+Para procesarMovimentos se armo lo siguiente:
+
+Consultas.comenzar()
+
+While(!consultas.fin()){
+    Consulta = consultas.proximo();
+    for(i = consulta.desde; i < consulta.hasta; i++){
+        cuenta[i] = cuenta[i] + consulta.valor;
+    }
+}
+
+Esta solucion es ineficiente, debido a que son muchas cuentas y puede tardar mucho tiempo
+
+Se arma una solucion mas optimizada y se arma una tabla para ver el tiempo que le toma procesar una cantidad determinada de cuentas
+
+Punto A
+
+N° Cuentas (y consultas)    procesarMovimentos    procesarMovimentosOptimizado
+        1000                    0.019 seg                   0.001 seg
+        10000                   0.029 seg                   0.004 seg
+        25000                   1.864 seg                   0.008 seg
+        50000                   7.018 seg                   0.012 seg
+        100000                  27.816 seg                  0.018 seg
+
+Punto B
+
+El metodo procesarMovimentos es muy ineficiente porque como estamos recorriendo el vector de consultas
+que tiene en cada posicion un valor de desde y de hasta, se procesa hasta desde "consulta.desde" hasta "consulta.hasta",
+es decir que estamos realizando un doble lazo con corte multiples veces por lo que, aumenta exponenciamente el tiempo de su ejecucion,
+ya que se esta realizando una sumatoria del tamaño del vector consultas, buscando en el vector de cuentas el valor de j y modificando su valor.
+
+
+Punto C
+
+La principal diferencia de procesarMovimentosOptimizado es que se crea un vector auxiliar que nos ayuda saber los valores que se deben sumar o restar en las cuentas.
+Ayudando de gran manera al timepo de ejecucion del metodo, recuciendo sustancialmente el tiempo que toma recorrer el vector de cuentas.
+

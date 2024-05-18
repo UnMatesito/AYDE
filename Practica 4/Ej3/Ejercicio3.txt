@@ -1,0 +1,5 @@
+Alguanas operaciones se ejecutan en un tiempo constante porque verifican una condicion o obtienen o settean un elemento de una posicion determinada,
+por lo que si se le especfica a travez de un parametro o el propio algoritmo entiende como realizar dicha accion, el timpo de ejecucion va a ser constante.
+Mientras que otros algoritmos tienen un orden lineal porque son los que no saben el tamaño que posee dicha ArrayList, como por ejemplo "add".
+"add" tiene que reccorer todo el ArrayList para insertar el elemento en cuestion en la ultima posicion.
+Lo mismo se aplica con remove.
