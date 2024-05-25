@@ -18,6 +18,10 @@ $T(n)= nc$
 
 #### Orden de tiempo de ejecución
 
+$O(n)$
+
+Porque lo que me as crece en este caso es $n$
+
 ### Punto B
 
 ```java
@@ -37,6 +41,10 @@ $T(n)= n*nc$
 $T(n)=n^2c$
 
 #### Orden de tiempo de ejecución
+
+$O(n^2)$
+
+Porque lo que mas va creciendo cuando tengo numeros muy grande es $n^2$
 
 ### Punto C
 
@@ -61,6 +69,10 @@ $T(n)=n^2c + nc$
 
 #### Orden de tiempo de ejecución
 
+$O(n^2)$
+
+Porque lo que mas va creciendo cuando tengo numeros muy grande es $n^2$
+
 ### Punto D
 
 ```java
@@ -75,6 +87,10 @@ $T(n)= (n/2-1+1)c$
 $T(n)= {n\over 2}c$
 
 #### Orden de tiempo de ejecución
+
+$O(n/2)$
+
+Porque lo que mas va creciendo cuando tengo numeros muy grande es $n \over 2$
 
 ### Punto E
 
@@ -91,23 +107,23 @@ for(int i = 0; i < n + 100; ++i) {
 
 #### Tiempo de ejecución
 
-$T(n)= \sum_{i=1}^{n+100}\left(\sum_{j=1}^{i*n}c_1 + \sum_{k=1}^{3n}c_2\right)$
+$T(n)= \sum_{i=1}^{n+100} \left(\sum_{j=1}^{i*n}c_1 + \sum_{k=1}^{3n}c_2\right)$
 
-$T(n)= \sum_{i=1}^{n+100}\left((i*n-1+1)*c + (3n-1+1)*c\right)$
+$T(n)= \sum_{i=1}^{n+100} \left((i*n-1+1)*c + (3n-1+1)*c\right)$
 
-$T(n)= \sum_{i=1}^{n+100}\left((i*n-1+1)*c + (3n-1+1)*c\right)$
+$T(n)= \sum_{i=1}^{n+100} \left((i*n-1+1)*c + (3n-1+1)*c\right)$
 
-$T(n)= \sum_{i=1}^{n+100}\left(i*n*c + 3n*c\right)$
+$T(n)= \sum_{i=1}^{n+100} \left(i*n*c + 3n*c\right)$
 
-$T(n)= \sum_{i=1}^{n+100}\left(i*c + 3*c\right)*n$
+$T(n)= \sum_{i=1}^{n+100} \left(i*c + 3*c\right)*n$
 
-$T(n)= n*\sum_{i=1}^{n+100}\left(i*c + 3*c\right)$
+$T(n)= n*\sum_{i=1}^{n+100} \left(i*c + 3*c\right)$
 
-$T(n)= n*\sum_{i=1}^{n+100}\left(i + 3\right)*c$
+$T(n)= n*\sum_{i=1}^{n+100} \left(i + 3\right)*c$
 
-$T(n)= nc*\sum_{i=1}^{n+100}\left(i + 3\right)$
+$T(n)= nc*\sum_{i=1}^{n+100} \left(i + 3\right)$
 
-$T(n)= nc*\sum_{i=1}^{n+100}i + \sum_{i=0}^{n+100}3$
+$T(n)= nc* \left(\sum_{i=1}^{n+100} i\right) + \left(\sum_{i=0}^{n+100} 3\right)$
 
 $T(n)= nc*({(n+100)*(n+100+1)\over 2} + (3n+300))$
 
@@ -124,6 +140,10 @@ $T(n)= ({n^3\over 2}c+{201n^2\over 2}c+5050nc + 3n^2c+300nc)$
 $T(n)= ({n^3\over 2}c+{201n^2\over 2}c+5350nc + 3n^2c)$
 
 #### Orden de tiempo de ejecución
+
+$O(n^3)$
+
+Porque el termino que mas predomina en la funcion polinomica es ${n^3\over 2}c$ al tener un grado cubico el crecimiento es mayor
 
 ### Punto F
 
@@ -155,8 +175,8 @@ $T(n)= c_1 + c_2 + {1\over 4}n*(n^2c_3)$
 
 $T(n)= c_1 + c_2 + {1\over 4}n^3c_3$
 
-$T(n)= 2c + {1\over 4}n^3c$
-
 #### Orden de tiempo de ejecución
 
-<!-- TODO: orden de las operaciones -->
+$O(n^3)$
+
+Debido a que el termino que mas predomina es el n cubico, por lo tanto determianmos que $n^3$ es el que va aterne uncrecimiento mayor, con respecto a los demas terminos
