@@ -87,33 +87,29 @@ public class Mapa {
     public List<String> caminoMasCorto(String ciudad1, String ciudad2){
         boolean[] marcas = new boolean[mapaciudades.getSize()];
         List<String> camino = new ArrayList<>();
-        List<String> caminoMin = new ArrayList<>();
-        if (mapaciudades.search(ciudad1) != null){
+        if (mapaciudades.search(ciudad1) != null && mapaciudades.search(ciudad2) != null){
             Vertex<String> inicio = mapaciudades.search(ciudad1);
             caminoMasCortoHelper(inicio, ciudad2, marcas, camino);
         }
-        return caminoMin;
+        return camino;
     }
 
-    private boolean caminoMasCortoHelper(Vertex<String> vertice, String destino, boolean[] marcas, List<String> camino){
-        Queue<Vertex<String>> cola = new Queue<>();
-        marcas[vertice.getPosition()] = true;
-        cola.enQueue(vertice);
-        while (!cola.isEmpty()) {
-            vertice = cola.deQueue();
-            camino.add(vertice.getData());
-            if (vertice.getData().equals(destino)){
-                return true;
+    private void caminoMasCortoHelper(Vertex<String> vertice, String destino, boolean[] marcas, List<String> camino){
+        List<String> caminoMin = new ArrayList<>();
+        caminoMin.add(vertice.getData());
+        int pos = vertice.getPosition();
+        if (!marcas[pos]) {
+                marcas[pos] = true;
             }
-            for (Edge<String> e: mapaciudades.getEdges(vertice)){
-                int i = e.getTarget().getPosition();
-                if (!marcas[i]){
-                    marcas[i] = true;
-                    cola.enQueue(e.getTarget());
+            for (Edge<String> e:mapaciudades.getEdges(vertice)){
+                caminoMasCortoHelper(e.getTarget(), destino, marcas, camino);
+                if (camino.size() < caminoMin.size()){
+                    camino.addAll(caminoMin);
                 }
             }
+            caminoMin.removeLast();
+            marcas[pos] = false;
         }
-        return false;
     }
 
     public List<String> caminoSinCargarCombustible(String ciudad1, String ciudad2, int tanqueAuto){
