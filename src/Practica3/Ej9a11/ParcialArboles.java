@@ -3,7 +3,10 @@ package Practica3.Ej9a11;
 import Practica1.Ej8.Queue;
 import Practica3.GeneralTree;
 
+import javax.imageio.stream.IIOByteBuffer;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ParcialArboles {
 
@@ -36,6 +39,42 @@ public class ParcialArboles {
         else {
             return esDeSeleccionHelper(arbol);
         }
+    }
+
+    public static List<Integer> resolverEJ10(GeneralTree<Integer> arbol){
+        if (!arbol.isEmpty()){
+            valorYLista maximo = new valorYLista();
+            maximo.setValor(Integer.MIN_VALUE);
+            camFiltradoMax(arbol, maximo, 0, new valorYLista());
+            System.out.println(maximo.getValor());
+            return maximo.getLista();
+        }
+        else {
+            return null;
+        }
+    }
+
+    private static List<Integer> camFiltradoMax(GeneralTree<Integer> arbol, valorYLista maximo, int nivel, valorYLista actual){
+        if (arbol.getData() != 0){
+            actual.setValor(actual.getValor() + arbol.getData() * nivel);
+            actual.getLista().add(arbol.getData());
+        }
+        if (arbol.isLeaf()) {
+            if (actual.getValor() > maximo.getValor()){
+                maximo.setValor(actual.getValor());
+                maximo.setLista(new ArrayList<>(actual.getLista()));
+                }
+            }
+        else{
+            for (GeneralTree<Integer> c: arbol.getChildren()){
+                camFiltradoMax(c, maximo, nivel+1, actual);
+                if (arbol.getData() != 0) {
+                    actual.getLista().removeLast();
+                }
+            }
+        }
+        actual.setValor(actual.getValor() - arbol.getData() * nivel);
+        return actual.getLista();
     }
 
     private static boolean arbolCreciente(GeneralTree<Integer> arbol){

@@ -38,6 +38,9 @@ public class Ej3 {
         System.out.println(metodo.devolverCaminoExceptuando("New York", "Madrid", excepto)+ "\n");
 
         System.out.println("Camino mas corto");
-        System.out.println(metodo.caminoMasCorto("New York", "Madrid"));
+        System.out.println(metodo.caminoMasCorto("New York", "Madrid")+ "\n");
+
+        System.out.println("Camino sin cargar combustible");
+        System.out.println(metodo.caminoSinCargarCombustible("New York", "Madrid", 50) + "\n");
     }
 }
